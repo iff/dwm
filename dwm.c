@@ -107,7 +107,8 @@ typedef struct {
 } Key;
 
 typedef struct {
-	const char *symbol;
+	/*const char *symbol;*/
+	void (*setSymbol)(char *, size_t);
 	void (*arrange)(Monitor *);
 } Layout;
 
@@ -261,6 +262,7 @@ static void (*handler[LASTEvent]) (XEvent *) = {
 };
 static Atom wmatom[WMLast], netatom[NetLast];
 static int running = 1;
+static int exitcode = EXIT_SUCCESS;
 static Cur *cursor[CurLast];
 static Clr **scheme;
 static Display *dpy;
@@ -396,7 +398,9 @@ arrange(Monitor *m)
 void
 arrangemon(Monitor *m)
 {
-	strncpy(m->ltsymbol, m->lt[m->sellt]->symbol, sizeof m->ltsymbol);
+	/*m->lt[m->sellt]->setSymbol(m->ltsymbol, sizeof m->ltsymbol);*/
+	snprintf(m->ltsymbol, sizeof m->ltsymbol, "[%d]=", m->nmaster);
+	/*strncpy(m->ltsymbol, m->lt[m->sellt]->getSymbol(), sizeof m->ltsymbol);*/
 	if (m->lt[m->sellt]->arrange)
 		m->lt[m->sellt]->arrange(m);
 }
@@ -472,7 +476,7 @@ void
 cleanup(void)
 {
 	Arg a = {.ui = ~0};
-	Layout foo = { "", NULL };
+	Layout foo = { getSymbol_null, NULL };
 	Monitor *m;
 	size_t i;
 
@@ -643,7 +647,8 @@ createmon(void)
 	m->topbar = topbar;
 	m->lt[0] = &layouts[0];
 	m->lt[1] = &layouts[1 % LENGTH(layouts)];
-	strncpy(m->ltsymbol, layouts[0].symbol, sizeof m->ltsymbol);
+	m->lt[m->sellt]->setSymbol(m->ltsymbol, sizeof m->ltsymbol);
+	/*strncpy(m->ltsymbol, layouts[0].getSymbol(), sizeof m->ltsymbol);*/
 	return m;
 }
 
@@ -981,6 +986,7 @@ void
 incnmaster(const Arg *arg)
 {
 	selmon->nmaster = MAX(selmon->nmaster + arg->i, 0);
+	snprintf(selmon->ltsymbol, sizeof selmon->ltsymbol, "[%d]=", selmon->nmaster);
 	arrange(selmon);
 }
 
@@ -1514,7 +1520,8 @@ setlayout(const Arg *arg)
 		selmon->sellt ^= 1;
 	if (arg && arg->v)
 		selmon->lt[selmon->sellt] = (Layout *)arg->v;
-	strncpy(selmon->ltsymbol, selmon->lt[selmon->sellt]->symbol, sizeof selmon->ltsymbol);
+	selmon->lt[selmon->sellt]->setSymbol(selmon->ltsymbol, sizeof selmon->ltsymbol);
+	/*strncpy(selmon->ltsymbol, selmon->lt[selmon->sellt]->getSymbol(), sizeof selmon->ltsymbol);*/
 	if (selmon->sel)
 		arrange(selmon);
 	else
@@ -1689,6 +1696,8 @@ tile(Monitor *m)
 {
 	unsigned int i, n, h, mw, my, ty;
 	Client *c;
+
+	m->lt[m->sellt]->setSymbol(m->ltsymbol, sizeof m->ltsymbol);
 
 	for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);
 	if (n == 0)
@@ -2161,5 +2170,6 @@ main(int argc, char *argv[])
 	run();
 	cleanup();
 	XCloseDisplay(dpy);
-	return EXIT_SUCCESS;
+	/*return EXIT_SUCCESS;*/
+	return exitcode;
 }
