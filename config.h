@@ -48,6 +48,9 @@ void getSymbol_null(char * target, size_t length) {
 void getSymbol_monocle(char * target, size_t length) {
 	snprintf(target, length, "[M]");
 }
+void getSymbol_cols(char * target, size_t length) {
+	snprintf(target, length, "[||]");
+}
 
 void self_restart(const Arg *arg) {
 	execl("/usr/local/bin/dwm", "/usr/local/bin/dwm", (char*) NULL);
@@ -59,6 +62,7 @@ static const Layout layouts[] = {
 	{ getSymbol_tile, tile }, /* first entry is default */
 	{ getSymbol_null, NULL }, /* no layout function means floating behavior */
 	{ getSymbol_monocle, monocle },
+	{ getSymbol_cols, col },
 };
 
 /* key definitions */
@@ -108,6 +112,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
+ 	{ MODKEY,                       XK_c,      setlayout,      {.v = &layouts[3]} },
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
