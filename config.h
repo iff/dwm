@@ -29,7 +29,7 @@ static const Rule rules[] = {
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "vlc",      NULL,       NULL,       ~0,           1,           -1 },
+	{ "Alacritty",NULL,       "offblast", 0,            1,           -1 },
 };
 
 /* layout(s) */
@@ -78,25 +78,27 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_blue, "-sf", col_gray4,
-	"-i", "-l", "50", "-p", ">", NULL };
-static const char *termcmd[]  = { "st", NULL };
+//static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_blue, "-sf", col_gray4,
+//        "-i", "-l", "50", "-p", ">", NULL };
+static const char *dmenucmd[]  = { "off-blast", NULL };
+static const char *termcmd[]  = { "alacritty", NULL };
 // static const char *lockcmd[] = { "/bin/bash -c 'xset dpms force standby; slock; xset -dpms'", NULL };
 static const char *lockcmd[] = { "slock'", NULL };
-static const char *scrotcmd[] = { "/usr/bin/scrot", "/tmp/i.png", "-e", "'gthumb /tmp/i.png'", NULL };
+static const char *scrotcmd[] = { "sshot", NULL };
 static const char *spotifyPreviousCmd[] = { "dbus-send", "--type=method_call", "--dest=org.mpris.MediaPlayer2.spotify", "/org/mpris/MediaPlayer2", "org.mpris.MediaPlayer2.Player.Previous", NULL };
 static const char *spotifyPlayPauseCmd[] = { "dbus-send", "--type=method_call", "--dest=org.mpris.MediaPlayer2.spotify", "/org/mpris/MediaPlayer2", "org.mpris.MediaPlayer2.Player.PlayPause", NULL };
 static const char *spotifyNextCmd[] = { "dbus-send", "--type=method_call", "--dest=org.mpris.MediaPlayer2.spotify", "/org/mpris/MediaPlayer2", "org.mpris.MediaPlayer2.Player.Next", NULL };
 static const char *pavuDownCmd[] = { "/usr/bin/pactl", "set-sink-volume", "@DEFAULT_SINK@", "-5%", NULL };
 static const char *pavuMuteCmd[] = { "/usr/bin/pactl", "set-sink-mute", "@DEFAULT_SINK@", "toggle", NULL };
 static const char *pavuUpCmd[] = { "/usr/bin/pactl", "set-sink-volume", "@DEFAULT_SINK@", "+5%", NULL };
-static const char *browserCmd[] = { "/opt/google/chrome/google-chrome", NULL };
-static const char *roamCmd[] = { "/opt/google/chrome/google-chrome", "--new-window", "https://roamresearch.com/#/app/iff", NULL };
+static const char *browserCmd[] = { "/opt/google/chrome/chrome", "--reset-variation-state", "--disable-field-trial-config", NULL };
+static const char *roamCmd[] = { "roam-research", NULL };
 
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
+	{ MODKEY|ShiftMask,             XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_r,      spawn,          {.v = roamCmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
