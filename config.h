@@ -79,20 +79,14 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-//static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_blue, "-sf", col_gray4,
-//        "-i", "-l", "50", "-p", ">", NULL };
-static const char *dmenucmd[]  = { "off-blast", NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_blue, "-sf", col_gray4,
+       "-i", "-l", "50", "-p", ">", NULL };
+// static const char *dmenucmd[]  = { "dmenu_run", NULL };
 static const char *termcmd[]  = { "alacritty", NULL };
 // static const char *lockcmd[] = { "/bin/bash -c 'xset dpms force standby; slock; xset -dpms'", NULL };
 static const char *lockcmd[] = { "slock'", NULL };
 static const char *scrotcmd[] = { "sshot", NULL };
-static const char *spotifyPreviousCmd[] = { "dbus-send", "--type=method_call", "--dest=org.mpris.MediaPlayer2.spotify", "/org/mpris/MediaPlayer2", "org.mpris.MediaPlayer2.Player.Previous", NULL };
-static const char *spotifyPlayPauseCmd[] = { "dbus-send", "--type=method_call", "--dest=org.mpris.MediaPlayer2.spotify", "/org/mpris/MediaPlayer2", "org.mpris.MediaPlayer2.Player.PlayPause", NULL };
-static const char *spotifyNextCmd[] = { "dbus-send", "--type=method_call", "--dest=org.mpris.MediaPlayer2.spotify", "/org/mpris/MediaPlayer2", "org.mpris.MediaPlayer2.Player.Next", NULL };
-static const char *pavuDownCmd[] = { "/usr/bin/pactl", "set-sink-volume", "@DEFAULT_SINK@", "-5%", NULL };
-static const char *pavuMuteCmd[] = { "/usr/bin/pactl", "set-sink-mute", "@DEFAULT_SINK@", "toggle", NULL };
-static const char *pavuUpCmd[] = { "/usr/bin/pactl", "set-sink-volume", "@DEFAULT_SINK@", "+5%", NULL };
-static const char *browserCmd[] = { "/opt/google/chrome/chrome", "--reset-variation-state", "--disable-field-trial-config", NULL };
+static const char *browserCmd[] = { "google-chrome-stable", "--reset-variation-state", "--disable-field-trial-config", NULL };
 static const char *roamCmd[] = { "roam-research", NULL };
 
 
@@ -132,21 +126,6 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 	{ MODKEY|ControlMask,           XK_s,      spawn,          {.v = lockcmd } },
 	{ MODKEY|ControlMask,           XK_p,      spawn,          {.v = scrotcmd } },
-	{ MODKEY,                       XK_F7,     spawn,          {.v = spotifyPreviousCmd} },
-	{ MODKEY,                       XK_F8,     spawn,          {.v = spotifyPlayPauseCmd} },
-	{ MODKEY,                       XK_F9,     spawn,          {.v = spotifyNextCmd} },
-	{ MODKEY|ShiftMask,             XK_F7,     spawn,          {.v = pavuDownCmd} },
-	{ MODKEY|ShiftMask,             XK_F8,     spawn,          {.v = pavuMuteCmd} },
-	{ MODKEY|ShiftMask,             XK_F9,     spawn,          {.v = pavuUpCmd} },
-	{ MODKEY,                       XK_F10,    spawn,          {.v = pavuMuteCmd} },
-	{ MODKEY,                       XK_F11,    spawn,          {.v = pavuDownCmd} },
-	{ MODKEY,                       XK_F12,    spawn,          {.v = pavuUpCmd} },
-	{ 0,                            XK_F13,    spawn,          {.v = spotifyPreviousCmd} },
-	{ 0,                            XK_F14,    spawn,          {.v = spotifyPlayPauseCmd} },
-	{ 0,                            XK_F15,    spawn,          {.v = spotifyNextCmd} },
-	{ MODKEY,                       XK_F13,    spawn,          {.v = pavuDownCmd} },
-	{ MODKEY,                       XK_F14,    spawn,          {.v = pavuMuteCmd} },
-	{ MODKEY,                       XK_F15,    spawn,          {.v = pavuUpCmd} },
 	{ MODKEY,                       XK_o,      spawn,          {.v = browserCmd} },
 	{ MODKEY|ShiftMask,             XK_r,      self_restart,   {0} },
 };
