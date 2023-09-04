@@ -78,12 +78,10 @@ static const Layout layouts[] = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
+// static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_blue, "-sf", col_gray4, "-i", "-l", "50", "-p", ">", NULL };
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_blue, "-sf", col_gray4,
-       "-i", "-l", "50", "-p", ">", NULL };
-// static const char *dmenucmd[]  = { "dmenu_run", NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", "-i", "-l", "50", "-p", ">", NULL };
 static const char *termcmd[]  = { "alacritty", NULL };
-// static const char *lockcmd[] = { "/bin/bash -c 'xset dpms force standby; slock; xset -dpms'", NULL };
 static const char *lockcmd[] = { "slock'", NULL };
 static const char *scrotcmd[] = { "sshot", NULL };
 static const char *browserCmd[] = { "google-chrome-stable", "--reset-variation-state", "--disable-field-trial-config", NULL };
