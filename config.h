@@ -5,8 +5,8 @@ static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "monospace:size=8" };
-static const char dmenufont[]       = "monospace:size=8";
+static const char *fonts[]          = { "monospace:size=9" };
+static const char dmenufont[]       = "monospace:size=9";
 static const char col_gray1[]       = "#282828";
 static const char col_gray2[]       = "#3c3836";
 static const char col_gray3[]       = "#d5c4a1";
@@ -80,7 +80,7 @@ static const Layout layouts[] = {
 /* commands */
 // static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_blue, "-sf", col_gray4, "-i", "-l", "50", "-p", ">", NULL };
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", "-i", "-l", "50", "-p", ">", NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-i", "-l", "50", "-p", ">", NULL };
 static const char *termcmd[]  = { "alacritty", NULL };
 static const char *lockcmd[] = { "slock", NULL };
 static const char *scrotcmd[] = { "sshot", NULL };
