@@ -20,7 +20,7 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "a", "s", "(d)", "f", "g  |", "z", "x", "(c)", "v" };
+static const char *tags[] = { "a", "r", "s", "t" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -119,11 +119,6 @@ static Key keys[] = {
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
 	TAGKEYS(                        XK_4,                      3)
-	TAGKEYS(                        XK_5,                      4)
-	TAGKEYS(                        XK_6,                      5)
-	TAGKEYS(                        XK_7,                      6)
-	TAGKEYS(                        XK_8,                      7)
-	TAGKEYS(                        XK_9,                      8)
 };
 
 /* button definitions */
