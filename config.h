@@ -29,7 +29,6 @@ static const Rule rules[] = {
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Alacritty",NULL,       "offblast", 0,            1,           -1 },
 };
 
 /* layout(s) */
@@ -37,6 +36,8 @@ static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] 
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
 static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
+
+static const float fgw = .9,fgh = .9; /* fraction of w/h to use when foregrounded */
 
 void getSymbol_tile(char * target, size_t length) {
 	snprintf(target, length, "[%d]=", nmaster);
@@ -85,37 +86,44 @@ static const char *lockcmd[] = { "slock", NULL };
 static const char *scrotcmd[] = { "sshot", NULL };
 static const char *browserCmd[] = { "zen-unscaled", NULL };
 // static const char *browserCmd[] = { "google-chrome-stable", "--reset-variation-state", "--disable-field-trial-config", NULL };
-static const char *roamCmd[] = { "roam-research", NULL };
 
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
-	{ MODKEY,                       XK_r,      spawn,          {.v = roamCmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
+	{ MODKEY,                       XK_o,      spawn,          {.v = browserCmd} },
+	{ MODKEY|ControlMask,           XK_s,      spawn,          {.v = lockcmd } },
+	{ MODKEY|ControlMask,           XK_p,      spawn,          {.v = scrotcmd } },
+	//
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
+	// no inc/dec atm
+	// { MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
+	// { MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
-	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
-	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
+	//
 	{ MODKEY,                       XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
+	//
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
  	{ MODKEY,                       XK_c,      setlayout,      {.v = &layouts[3]} },
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
-	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
-	{ MODKEY,                       XK_o,      spawn,          {.v = browserCmd} },
+ 	//
+	{ MODKEY,                       XK_e,      toggleforegrounded, {0} },
+	// { MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
+	//
+	{ MODKEY,                       XK_i,      view,           {.ui = ~0 } },
+	{ MODKEY,                       XK_n,      tag,            {.ui = ~0 } },
+	//
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
-	{ MODKEY|ControlMask,           XK_s,      spawn,          {.v = lockcmd } },
-	{ MODKEY|ControlMask,           XK_p,      spawn,          {.v = scrotcmd } },
 	{ MODKEY|ShiftMask,             XK_r,      self_restart,   {0} },
-	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
-	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
+	//
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
