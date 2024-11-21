@@ -37,7 +37,7 @@ static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
 static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
 
-static const float fgw = .9,fgh = .9; /* fraction of w/h to use when foregrounded */
+static const float fgw = .95,fgh = .95; /* fraction of w/h to use when foregrounded */
 
 void getSymbol_tile(char * target, size_t length) {
 	snprintf(target, length, "[%d]=", nmaster);
