@@ -84,7 +84,7 @@ static const char *dmenucmd[] = { "dmenu_run", "-i", "-l", "50", "-p", ">", NULL
 static const char *termcmd[]  = { "alacritty", NULL };
 static const char *lockcmd[] = { "slock", NULL };
 static const char *scrotcmd[] = { "sshot", NULL };
-static const char *browserCmd[] = { "zen-unscaled", NULL };
+static const char *browserCmd[] = { "firefox", NULL };
 // static const char *browserCmd[] = { "google-chrome-stable", "--reset-variation-state", "--disable-field-trial-config", NULL };
 
 
