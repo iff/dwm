@@ -5,8 +5,8 @@ static const unsigned int borderpx  = 3;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "ZedMono Nerd Font:size=10" };
-static const char dmenufont[]       = "ZedMono Nerd Font:size=10";
+static const char *fonts[]          = { "IosevkaTerm Nerd Font Mono:size=10" };
+static const char dmenufont[]       = "IosevkaTerm Nerd Font Mono:size=10";
 static const char col_gray1[]       = "#282828";
 static const char col_gray2[]       = "#3c3836";
 static const char col_gray3[]       = "#d5c4a1";
